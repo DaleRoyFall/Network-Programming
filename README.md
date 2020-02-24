@@ -1,2 +1,2 @@
 # Network-Programming
-Project where are used TCP/IP model, protocols and threads.
+A project that uses the TCP / IP model, protocols, and threads.
