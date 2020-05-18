@@ -219,17 +219,17 @@ public class AuthForm extends javax.swing.JFrame {
     private void LoginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginButtonMouseClicked
         String username = UsernameTextField.getText();
         String password = new String(PasswordField.getPassword());
-        
+
         // Facebook application data
         String appID = "3756977847707176";
-        String domain = "https://google.com/"; 
-        
+        String domain = "https://google.com/";
+
         // Url to get access tocken
         ScopeBuilder permissions = new ScopeBuilder();
         permissions.addPermission(FacebookPermissions.PUBLIC_PROFILE);
         permissions.addPermission(FacebookPermissions.PAGES_SHOW_LIST);
         //permissions.addPermission(FacebookPermissions.PAGES_READ_USER_CONTENT);
-        
+
         FacebookClient facebookClient = new DefaultFacebookClient(Version.VERSION_7_0);
         String oauthUrl = facebookClient.getLoginDialogUrl(appID, domain, permissions);
 
@@ -239,7 +239,7 @@ public class AuthForm extends javax.swing.JFrame {
 
         WebDriver driver = new ChromeDriver();
 
-        driver.get(oauthUrl+ "&response_type=token");
+        driver.get(oauthUrl + "&response_type=token");
 
         // Fiend fields by id
         WebElement usernameField = driver.findElement(By.id("email"));
@@ -250,25 +250,26 @@ public class AuthForm extends javax.swing.JFrame {
         usernameField.sendKeys(username);
         passwordField.sendKeys(password);
         loginButton.click();
-        
+
+        String accessTockenPattern = "^(https?:\\/\\/)?(www\\.)?google.com\\/#access_token=.*";
+
         // If we are at login page then stay in while loop
-        while(driver.getCurrentUrl().contains("facebook.com")){}
-        
+        while (!driver.getCurrentUrl().matches(accessTockenPattern)) {}
+
         // Get response url
         String responseUrl = driver.getCurrentUrl();
-        
+
         // Get access token
         String accessToken = responseUrl.substring(responseUrl.indexOf("=") + 1, responseUrl.indexOf("&"));
 
         // Close driver
         //driver.close();
         //--------------------------------------------------------------------------------------------------
-        
         // Create new window
         MainForm mainWindow = new MainForm(accessToken);
         centerTheWindow(mainWindow);
         mainWindow.setVisible(true);
-        
+
         // Dispose login window
         this.dispose();
     }//GEN-LAST:event_LoginButtonMouseClicked

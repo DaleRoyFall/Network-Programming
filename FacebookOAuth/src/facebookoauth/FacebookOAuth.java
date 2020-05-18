@@ -32,7 +32,6 @@ public class FacebookOAuth {
         centerTheWindow(mainWindow);
         mainWindow.setVisible(true);*/
         
-        
         AuthForm auth = new AuthForm();
         auth.setVisible(true);
         centerTheWindow(auth);

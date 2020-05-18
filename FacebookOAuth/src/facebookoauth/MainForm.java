@@ -46,8 +46,6 @@ public final class MainForm extends javax.swing.JFrame {
     private String pageID;
     private User user;
     private Page page;
-    
-    
 
     ArrayList<AccountPages> listOfPages = new ArrayList<>();
 
@@ -60,7 +58,6 @@ public final class MainForm extends javax.swing.JFrame {
         PagePanel.setVisible(false);
 
         //System.out.println(accessToken);
-
         // Get facebook client
         facebookClient = new DefaultFacebookClient(accessToken, Version.VERSION_7_0);
         // Get facebook user
@@ -85,10 +82,10 @@ public final class MainForm extends javax.swing.JFrame {
 
                     // Get page
                     var page = listOfPages.get(index);
-                    
+
                     // Save page ID
                     pageID = page.getId();
-                    
+
                     // Set data
                     PageNameLabel.setText(page.getName());
                     PageIDLabel.setText("ID: " + page.getId());
@@ -442,7 +439,13 @@ public final class MainForm extends javax.swing.JFrame {
     private void PostButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostButtonMousePressed
         String message = PostTextField.getText();
 
-        facebookClient.publish(pageID + "/feed", GraphResponse.class, Parameter.with("message", message));
+        // Create new thread
+        new Thread("Post") {
+            @Override
+            public void run() {
+                facebookClient.publish(pageID + "/feed", GraphResponse.class, Parameter.with("message", message));
+            }
+        }.start();
     }//GEN-LAST:event_PostButtonMousePressed
 
     /**
