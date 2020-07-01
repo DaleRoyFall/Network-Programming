@@ -53,7 +53,7 @@ public class MainWindow extends javax.swing.JFrame {
         InboxPanel.setVisible(false);
         
         // Save current inbox message count
-        inboxMessageCount = inbox.getMessageCount();
+        //inboxMessageCount = inbox.getMessageCount();
         
         //
         jLabelNewMessage.setVisible(false);

@@ -21,7 +21,7 @@ class Multithreading extends Thread {
 	private static void saveImage(String imageUrl, String imageName) throws IOException {
 		URL url = new URL(imageUrl);
 		
-		String destinationFile = "C://Users/User/Desktop/imageSave/" + imageName;
+		String destinationFile = System.getProperty("user.dir") + "/src/saveImages/" + imageName;
 		
 		InputStream is = url.openStream();
 		OutputStream os = new FileOutputStream(destinationFile);
@@ -97,6 +97,7 @@ public class GetRequest {
         
         // Read wanted number of images
         Scanner scanner = new Scanner(System.in);
+        System.out.println(System.getProperty("user.dir"));
         System.out.println("How much images you want to download?");
         numberOfImages = scanner.nextInt();
         scanner.close();
@@ -124,7 +125,7 @@ public class GetRequest {
     	// Regex pattern for images
         Pattern pattern = Pattern.compile("[^\\'\"=\\s]+\\.(jpe?g|png|gif)");
         
-		// Matcher that contains found regex
+        // Matcher that contains found regex
         Matcher match;
         
         // Image url

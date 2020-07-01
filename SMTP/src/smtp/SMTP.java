@@ -19,18 +19,18 @@ public class SMTP {
      */
     public static void main(String[] args) throws MessagingException {
         // Create login window
-        LoginWindow loginWindow = new LoginWindow();
+        /*LoginWindow loginWindow = new LoginWindow();
         // Align the window to center
         centerTheWindow(loginWindow);
         // Set window visible
-        loginWindow.setVisible(true);
+        loginWindow.setVisible(true);*/
         
         
-        /*MainWindow mainWindow = new MainWindow("", "");
+        MainWindow mainWindow = new MainWindow();
         // Align the window to center
         centerTheWindow(mainWindow);
         // Set window visible
-        mainWindow.setVisible(true);*/
+        mainWindow.setVisible(true);
     }
     
 }
